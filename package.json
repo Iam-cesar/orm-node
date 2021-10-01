@@ -1,0 +1,21 @@
+{
+    "name": "alura-orm",
+    "version": "1.0.0",
+    "description": "projeto ORM alura com mysql",
+    "main": "./api/index.js",
+    "author": "cesar-abj",
+    "scripts": {
+        "dev": "nodemon ./api/index.js"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "mysql2": "^2.3.0",
+        "sequelize": "^6.6.5",
+        "sequelize-cli": "^6.2.0"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.13"
+    }
+}
