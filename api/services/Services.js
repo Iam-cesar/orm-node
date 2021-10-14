@@ -6,7 +6,7 @@ class Services {
   }
 
   async pegaTodosOsRegistros (where = {}) {
-    return database[this.nomeModelo]
+    return await database[this.nomeModelo]
       .findAll({
         where: {
           ...where
@@ -15,32 +15,32 @@ class Services {
   }
 
   async pegaUmRegistro (id) {
-    return database[this.nomeModelo]
+    return await database[this.nomeModelo]
       .findOne({
         where: {
-          id: id
+          id: parseInt(id)
         }
       })
   }
 
   async criaRegistro (novoRegistro) {
-    return database[this.nomeModelo].create(novoRegistro)
+    return await database[this.nomeModelo].create(novoRegistro)
   }
 
   async atualizaRegistro (id, dados, transacao = {}) {
-    return database[this.nomeModelo]
-      .update(dados, { where: { id: id } }, transacao)
+    return await database[this.nomeModelo]
+      .update(dados, { where: { id: parseInt(id) } }, transacao)
   }
 
   async atualizaRegistros (where, dados, transacao = {}) {
-    return database[this.nomeModelo]
+    return await database[this.nomeModelo]
       .update(dados, { where: { ...where } }, transacao)
   }
 
   async apagaRegistro (id) {
-    return database[this.nomeModelo].destroy({
+    return await database[this.nomeModelo].destroy({
       where: {
-        id: id
+        id: parseInt(id)
       }
     })
   }
