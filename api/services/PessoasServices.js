@@ -27,16 +27,36 @@ class PessoasServices extends Services {
   async cancelaPessoasEMatriculas (estudanteID) {
     return database.sequelize.transaction(async transaction => {
       await super.atualizaRegistro(
-        estudanteID,
+        parseInt(estudanteID),
         { ativo: false },
         { transaction }
       )
       await this.matriculas.atualizaRegistros(
-        { estudante_id: estudanteID },
+        { estudante_id: parseInt(estudanteID) },
         { status: 'cancelado' },
         { transaction }
       )
     })
+  }
+
+  async restauraPessoa (id) {
+    return await database[this.nomeModelo].restore({
+      where: {
+        id: parseInt(id)
+      }
+    })
+  }
+
+
+  async pegaMatriculas (estudanteId) {
+    const pessoa = await database[this.nomeModelo].findOne({
+      where: {
+        id: parseInt(estudanteId)
+      }
+    })
+    const resposta = await pessoa.getAulasMatriculadas()
+
+    return resposta
   }
 }
 

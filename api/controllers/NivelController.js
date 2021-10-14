@@ -1,5 +1,5 @@
 const { NiveisServices } = require('../services')
-const niveisServices = new NiveisServices('Niveis')
+const niveisServices = new NiveisServices()
 
 class NivelController {
   static async pegaTodosOsNiveis (req, res, next) {
