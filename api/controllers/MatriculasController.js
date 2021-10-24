@@ -48,8 +48,9 @@ class MatriculasController {
       res.status(200).json(resposta)
       next()
     } catch (err) {
-      res.status(500).json(err)
-      next()
+      res.status(200).json({
+        message: "Não existem turmas lotadas"
+      })
     }
   }
 

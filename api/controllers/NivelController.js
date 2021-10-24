@@ -16,11 +16,7 @@ class NivelController {
   static async pegaUmNivel (req, res, next) {
     const { id } = req.params
     try {
-      const resposta = await database.Niveis.findOne({
-        where: {
-          id: parseInt(id)
-        }
-      })
+      const resposta = await niveisServices.pegaUmRegistro(id)
       res.status(200).json(resposta)
       next()
     } catch (err) {
@@ -32,7 +28,7 @@ class NivelController {
   static async criaUmNivel (req, res, next) {
     const novaNivel = req.body
     try {
-      const resposta = await database.Niveis.create(novaNivel)
+      const resposta = await niveisServices.criaRegistro(novaNivel)
       res.status(200).json(resposta)
       next()
     } catch (err) {
@@ -43,20 +39,12 @@ class NivelController {
 
   static async atualizaUmNivel (req, res, next) {
     const { id } = req.params
-    const novaNivel = req.body
+    const novasInformacoes = req.body
 
     try {
-      await database.Niveis.update(novaNivel, {
-        where: {
-          id: parseInt(id)
-        }
-      })
+      await niveisServices.atualizaRegistro(id, novasInformacoes)
 
-      const resposta = await database.Niveis.findOne({
-        where: {
-          id: parseInt(id)
-        }
-      })
+      const resposta = await niveisServices.pegaUmRegistro(id)
       res.status(200).json(resposta)
       next()
     } catch (err) {
@@ -68,11 +56,7 @@ class NivelController {
   static async deletaUmNivel (req, res, next) {
     const { id } = req.params
     try {
-      await database.Niveis.destroy({
-        where: {
-          id: parseInt(id)
-        }
-      })
+      await niveisServices.apagaRegistro(id)
       res.status(200).send({
         message: 'Item foi deletado'
       })
@@ -86,11 +70,7 @@ class NivelController {
   static async restauraNivel (req, res, next) {
     const { id } = req.params
     try {
-      await database.Niveis.restore({
-        where: {
-          id: parseInt(id)
-        }
-      })
+      await niveisServices.restauraRegistro(id)
 
       res.status(200).json({ message: `id ${id} foi restaurado` })
       next()
