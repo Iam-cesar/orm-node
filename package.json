@@ -5,7 +5,9 @@
     "main": "./api/index.js",
     "author": "cesar-abj",
     "scripts": {
-        "dev": "nodemon ./api/index.js"
+        "dev": "nodemon ./api/index.js",
+        "build": "yarn sequelize-cli db:migrate && yarn start",
+        "start": "node ."
     },
     "license": "MIT",
     "dependencies": {

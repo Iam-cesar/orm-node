@@ -65,7 +65,7 @@ class PessoaController {
   static async restauraPessoa (req, res, next) {
     const { id } = req.params
     try {
-      await pessoasServices.restauraPessoa(id)
+      await pessoasServices.restauraRegistro(id)
 
       res.status(200).json({ message: `id ${id} foi restaurado` })
       next()
@@ -79,7 +79,7 @@ class PessoaController {
     const { id } = req.params
     const novasInformacoes = req.body
     try {
-      await pessoasServices.atualizaRegistro(novasInformacoes, id)
+      await pessoasServices.atualizaRegistro(id, novasInformacoes)
       const resposta = await pessoasServices.pegaUmRegistro(id)
       res.status(201).json(resposta)
       next()

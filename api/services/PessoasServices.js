@@ -39,15 +39,6 @@ class PessoasServices extends Services {
     })
   }
 
-  async restauraPessoa (id) {
-    return await database[this.nomeModelo].restore({
-      where: {
-        id: parseInt(id)
-      }
-    })
-  }
-
-
   async pegaMatriculas (estudanteId) {
     const pessoa = await database[this.nomeModelo].findOne({
       where: {

@@ -27,14 +27,23 @@ class Services {
     return await database[this.nomeModelo].create(novoRegistro)
   }
 
-  async atualizaRegistro (id, dados, transacao = {}) {
+  async atualizaRegistro (id, novasInformacoes, transacao = {}) {
+
     return await database[this.nomeModelo]
-      .update(dados, { where: { id: parseInt(id) } }, transacao)
+      .update(novasInformacoes, { where: { id: parseInt(id) } }, transacao)
   }
 
   async atualizaRegistros (where, dados, transacao = {}) {
     return await database[this.nomeModelo]
       .update(dados, { where: { ...where } }, transacao)
+  }
+
+  async restauraRegistro (id) {
+    return await database[this.nomeModelo].restore({
+      where: {
+        id: parseInt(id)
+      }
+    })
   }
 
   async apagaRegistro (id) {
